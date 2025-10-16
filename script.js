@@ -127,11 +127,11 @@ function loadMemes() {
         const memeCard = document.createElement('div');
         memeCard.className = 'meme-card';
         memeCard.innerHTML = `
-            <img src="${meme.image}" alt="${meme.title}" class="meme-image" onclick="openImageModal('${meme.image}', '${meme.title}', '${meme.caption}')" onerror="this.src='images/placeholder.jpg'">
+            <img src="${meme.image}" alt="${meme.title}" class="meme-image" onclick="openImageModal('${meme.image}', '${meme.title.replace(/'/g, "\\'")}', '${meme.caption.replace(/'/g, "\\'")}')" onerror="this.src='images/placeholder.jpg'">
             <div class="meme-title">${meme.title}</div>
             <div class="meme-caption">${meme.caption}</div>
             <button class="share-button" onclick="shareMeme(${index})">
-                📤 Jaa Slackiin
+                📥 Lataa ja jaa kuva
             </button>
         `;
         memeGrid.appendChild(memeCard);
@@ -140,54 +140,11 @@ function loadMemes() {
     console.log('Memes loaded!');
 }
 
-async function shareMeme(index) {
+function shareMeme(index) {
     const meme = golfMemes[index];
     
-    console.log('Starting shareMeme for index:', index);
-    console.log('Image URL:', meme.image);
-    console.log('navigator.clipboard:', navigator.clipboard);
-    console.log('window.ClipboardItem:', window.ClipboardItem);
-    
+    // Simple method: just open the image in new tab for download
     try {
-        // Try to copy image to clipboard first
-        if (navigator.clipboard && window.ClipboardItem) {
-            console.log('Clipboard API available, fetching image...');
-            
-            // Try to fetch the image
-            let response;
-            try {
-                response = await fetch(meme.image);
-                console.log('Fetch response:', response);
-            } catch (fetchError) {
-                console.error('Fetch failed (CORS issue):', fetchError);
-                throw new Error('Cannot fetch image due to CORS restrictions. Use HTTP server instead of file://');
-            }
-            
-            const blob = await response.blob();
-            console.log('Blob created:', blob, 'Type:', blob.type);
-            
-            const clipboardItem = new ClipboardItem({
-                [blob.type]: blob
-            });
-            console.log('ClipboardItem created:', clipboardItem);
-            
-            await navigator.clipboard.write([clipboardItem]);
-            console.log('Clipboard write successful!');
-            showNotification('✅ Meemikuva kopioitu leikepöydälle! Voit nyt liittää sen Slackiin.');
-            return;
-        } else {
-            console.log('Clipboard API not available');
-            console.log('navigator.clipboard:', navigator.clipboard);
-            console.log('window.ClipboardItem:', window.ClipboardItem);
-        }
-    } catch (error) {
-        console.error('Clipboard API failed:', error);
-        console.log('Error details:', error.message, error.stack);
-    }
-    
-    // Fallback: Create a temporary link to download the image
-    try {
-        console.log('Using fallback method...');
         const link = document.createElement('a');
         link.href = meme.image;
         link.download = `golf-meme-${index + 1}.webp`;
@@ -198,7 +155,7 @@ async function shareMeme(index) {
         
         showNotification('📥 Meemikuva avattu uudessa välilehdessä! Voit nyt tallentaa sen (oikea klikki → "Tallenna kuva nimellä") ja liittää Slackiin.');
     } catch (error) {
-        console.error('Error with fallback:', error);
+        console.error('Error opening image:', error);
         showNotification('❌ Virhe kuvan avaamisessa. Kokeile klikata meemikuvasta suoraan.');
     }
 }

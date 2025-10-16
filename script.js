@@ -143,30 +143,63 @@ function loadMemes() {
 async function shareMeme(index) {
     const meme = golfMemes[index];
     
+    console.log('Starting shareMeme for index:', index);
+    console.log('Image URL:', meme.image);
+    console.log('navigator.clipboard:', navigator.clipboard);
+    console.log('window.ClipboardItem:', window.ClipboardItem);
+    
     try {
-        // Fetch the image
-        const response = await fetch(meme.image);
-        const blob = await response.blob();
-        
-        // Copy image to clipboard
+        // Try to copy image to clipboard first
         if (navigator.clipboard && window.ClipboardItem) {
+            console.log('Clipboard API available, fetching image...');
+            
+            // Try to fetch the image
+            let response;
+            try {
+                response = await fetch(meme.image);
+                console.log('Fetch response:', response);
+            } catch (fetchError) {
+                console.error('Fetch failed (CORS issue):', fetchError);
+                throw new Error('Cannot fetch image due to CORS restrictions. Use HTTP server instead of file://');
+            }
+            
+            const blob = await response.blob();
+            console.log('Blob created:', blob, 'Type:', blob.type);
+            
             const clipboardItem = new ClipboardItem({
                 [blob.type]: blob
             });
+            console.log('ClipboardItem created:', clipboardItem);
             
             await navigator.clipboard.write([clipboardItem]);
+            console.log('Clipboard write successful!');
             showNotification('✅ Meemikuva kopioitu leikepöydälle! Voit nyt liittää sen Slackiin.');
+            return;
         } else {
-            // Fallback: download the image
-            const link = document.createElement('a');
-            link.href = meme.image;
-            link.download = `golf-meme-${index + 1}.webp`;
-            link.click();
-            showNotification('📥 Meemikuva ladattu! Voit nyt liittää sen Slackiin.');
+            console.log('Clipboard API not available');
+            console.log('navigator.clipboard:', navigator.clipboard);
+            console.log('window.ClipboardItem:', window.ClipboardItem);
         }
     } catch (error) {
-        console.error('Error copying image:', error);
-        showNotification('❌ Virhe kuvan kopioinnissa. Kokeile ladata kuva manuaalisesti.');
+        console.error('Clipboard API failed:', error);
+        console.log('Error details:', error.message, error.stack);
+    }
+    
+    // Fallback: Create a temporary link to download the image
+    try {
+        console.log('Using fallback method...');
+        const link = document.createElement('a');
+        link.href = meme.image;
+        link.download = `golf-meme-${index + 1}.webp`;
+        link.target = '_blank';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        
+        showNotification('📥 Meemikuva avattu uudessa välilehdessä! Voit nyt tallentaa sen (oikea klikki → "Tallenna kuva nimellä") ja liittää Slackiin.');
+    } catch (error) {
+        console.error('Error with fallback:', error);
+        showNotification('❌ Virhe kuvan avaamisessa. Kokeile klikata meemikuvasta suoraan.');
     }
 }
 

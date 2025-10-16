@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GolfMemeBook - Golf Meemit</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="animated-bg">
+        <div class="golf-ball ball-1">⛳</div>
+        <div class="golf-ball ball-2">🏌️</div>
+        <div class="golf-ball ball-3">⛳</div>
+        <div class="golf-ball ball-4">🏌️</div>
+    </div>
+
+    <div class="container">
+        <!-- Hero Section -->
+        <div class="hero-section">
+            <div class="hero-content">
+                <div class="brand-badge">
+                    <span class="badge-icon">⛳</span>
+                    <span class="badge-text">GolfMemeBook</span>
+                </div>
+                <h1 class="hero-title">
+                    <span class="title-line">Golf Meemit</span>
+                </h1>
+                <p class="hero-subtitle">18 huippumeemiä jokaiselle golfhetkelle</p>
+            </div>
+        </div>
+
+        <div class="meme-grid" id="memeGrid">
+            <!-- Memes will be loaded here -->
+        </div>
+
+        <!-- CTA Section -->
+        <div class="cta-section">
+            <div class="cta-card">
+                <div class="cta-icon">🎯</div>
+                <h3 class="cta-title">Tiesithän että...</h3>
+                <p class="cta-description">Tämä sivu on tehty juuri TEITÄ varten! 🏌️</p>
+                <button class="cta-button" id="ctaButton">
+                    <span class="cta-text">Klikkaa tästä nähdäksesi kuka tämän teki</span>
+                    <span class="cta-arrow">→</span>
+                </button>
+            </div>
+        </div>
+
+        <footer class="main-footer">
+            <p>© GolfMemeBook 2025</p>
+        </footer>
+    </div>
+
+    <!-- Image Modal -->
+    <div class="modal" id="imageModal">
+        <div class="image-modal-content">
+            <button class="close-btn" id="closeImageBtn">&times;</button>
+            <img id="modalImage" src="" alt="" class="full-image">
+            <div class="image-info">
+                <h3 id="modalTitle"></h3>
+                <p id="modalCaption"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Modal -->
+    <div class="modal" id="contactModal">
+        <div class="modal-content">
+            <button class="close-btn" id="closeBtn">&times;</button>
+            
+            <div class="flashing-box"></div>
+            
+            <div class="contact-info">
+                <h2 class="big-title">🎉 MIKKI 🎉</h2>
+                
+                <div class="cats-container">
+                    <span class="cat">🐱</span>
+                    <span class="cat">😺</span>
+                    <span class="cat">😸</span>
+                    <span class="cat">😹</span>
+                    <span class="cat">😻</span>
+                </div>
+                
+                <div class="buy-banner">
+                    <h3 class="flashing-text">OSTA OSTA OSTA!</h3>
+                </div>
+                
+                <div class="contact-details">
+                    <p>📧 Email: mikki@goodside.fi</p>
+                    <p>📱 Puhelin: +358 408698887</p>
+                    <p>💼 LinkedIn: https://www.linkedin.com/in/mikkiaaltoyleva/</p>
+                    <p>🌐 Firman sivu: https://goodside.fi</p>
+                </div>
+                
+                <p class="tagline-bottom">
+                    Muista mut kun teette sitä golf-sovellusta!
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+

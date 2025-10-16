@@ -1,0 +1,60 @@
+⛳ GOLF MEEMIT - PIKAOPAS ⛳
+
+📋 MITÄ TEHDÄ SEURAAVAKSI:
+
+1. ✅ AVAA SIVU
+   - Kaksoisklikkaa: index.html
+   - Sivusto aukeaa selaimessa
+
+2. 🖼️ LISÄÄ OMAT MEEMIKUVAT
+   
+   a) Tallenna golf-meemit:
+      - Pinterest: https://au.pinterest.com/golfwsing1/golf-memes/
+      - Reddit: https://www.reddit.com/r/golf/
+      - Google kuvahaku: "golf memes"
+   
+   b) Nimeä kuvat:
+      meme1.jpg
+      meme2.jpg
+      meme3.jpg
+      ... jne.
+   
+   c) Kopioi kuvat kansioon:
+      📁 golfmemebook/images/
+   
+   d) Päivitä sivu selaimessa (paina F5)
+
+3. ✏️ MUOKKAA YHTEYSTIEDOT
+   - Avaa: index.html
+   - Etsi rivi 38-42
+   - Vaihda omat tietosi:
+     * Email
+     * Puhelin
+     * LinkedIn
+     * Portfolio
+
+4. 🚀 JULKAISE NETTI
+   
+   HELPOINTA:
+   - Vedä koko kansio → netlify.com/drop
+   - Saat ilmaisen linkin heti!
+   
+   TAI:
+   - GitHub Pages (ilmainen)
+   - Vercel (ilmainen)
+
+💡 VINKKEJÄ:
+
+- Voit lisätä rajattomasti meemejä
+- Muokkaa tekstit: script.js (rivi 1-50)
+- Sivusto toimii ilman internettiä
+- Responsiivinen = toimii mobiilissa
+
+📧 ONGELMIA?
+
+- Kuva ei näy? → Tarkista että tiedostonimi on oikein
+- Modal ei toimi? → Avaa selaimen konsoli (F12)
+- Muuta? → Lue README.md
+
+HAVE FUN! 🏌️‍♂️
+
